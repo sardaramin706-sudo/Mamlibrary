@@ -1,0 +1,253 @@
+<div class="min-h-screen bg-stone-100 text-stone-900 font-sans" dir="rtl">
+  
+  <!-- Header -->
+  <header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-emerald-700 rounded-xl flex items-center justify-center shadow-inner">
+          <mat-icon class="text-white">account_balance</mat-icon>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-stone-800 tracking-tight">کتێبخانەی مام</h1>
+          <p class="text-[10px] text-stone-500 font-medium uppercase tracking-wider">Harvard Standard AI</p>
+        </div>
+      </div>
+      
+      <nav class="flex gap-2">
+        <button (click)="setView('landing')" [class.bg-stone-100]="currentView() === 'landing'" class="px-4 py-2 rounded-lg text-sm font-medium text-stone-600 hover:bg-stone-100 transition-colors flex items-center gap-2">
+          <mat-icon class="!w-4 !h-4 !text-[16px]">home</mat-icon>
+          سەرەکی
+        </button>
+        <button (click)="setView('writing')" [class.bg-stone-100]="currentView() === 'writing'" class="px-4 py-2 rounded-lg text-sm font-medium text-stone-600 hover:bg-stone-100 transition-colors flex items-center gap-2">
+          <mat-icon class="!w-4 !h-4 !text-[16px]">edit_document</mat-icon>
+          نووسین
+        </button>
+        <button (click)="setView('library')" [class.bg-stone-100]="currentView() === 'library'" class="px-4 py-2 rounded-lg text-sm font-medium text-stone-600 hover:bg-stone-100 transition-colors flex items-center gap-2">
+          <mat-icon class="!w-4 !h-4 !text-[16px]">library_books</mat-icon>
+          کتێبخانە
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Global Error Banner -->
+  @if (globalError()) {
+    <div class="bg-red-50 border-l-4 border-red-500 p-4 m-4 max-w-7xl mx-auto rounded-r-lg shadow-sm flex items-start gap-3">
+      <mat-icon class="text-red-500">error_outline</mat-icon>
+      <p class="text-red-700 text-sm font-medium">{{ globalError() }}</p>
+    </div>
+  }
+
+  <!-- Landing View -->
+  @if (currentView() === 'landing') {
+    <main class="max-w-7xl mx-auto px-4 py-12">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6 leading-tight">
+          نووسینی ئەکادیمی لەسەر ئاستی <span class="text-emerald-700">زانکۆی هارڤارد</span>
+        </h2>
+        <p class="text-lg text-stone-600 mb-8 leading-relaxed">
+          بەهێزترین سیستەمی زیرەکی دەستکرد بۆ نووسینی توێژینەوە، ماستەرنامە، و دکتۆرانامە بە ستانداردی جیهانی و بێ هەڵە.
+        </p>
+        <button (click)="setView('writing')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg hover:shadow-xl flex items-center gap-3 mx-auto text-lg">
+          <mat-icon>rocket_launch</mat-icon>
+          دەستپێکردنی پڕۆژەی نوێ
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200 hover:border-emerald-300 transition-colors">
+          <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+            <mat-icon class="text-emerald-700">school</mat-icon>
+          </div>
+          <h3 class="text-xl font-bold text-stone-800 mb-3">ستانداردی هارڤارد</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">هەموو نووسینەکان بەپێی توندترین پێوەرە ئەکادیمییەکانی زانکۆی هارڤارد دادەڕێژرێن، بەبێ لایەنگیری و بە لۆژیکی پۆڵاین.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200 hover:border-emerald-300 transition-colors">
+          <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+            <mat-icon class="text-emerald-700">psychology</mat-icon>
+          </div>
+          <h3 class="text-xl font-bold text-stone-800 mb-3">شیکاری قووڵ</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">بەکارهێنانی زیاتر لە ٥٠ تایبەتمەندی پێشکەوتوو وەک دژە-ئارگیومێنت، تیۆری بنچینەیی، و شیکاری چۆنایەتی و چەندایەتی.</p>
+        </div>
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-stone-200 hover:border-emerald-300 transition-colors">
+          <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+            <mat-icon class="text-emerald-700">gavel</mat-icon>
+          </div>
+          <h3 class="text-xl font-bold text-stone-800 mb-3">پێداچوونەوەی هاوەڵان</h3>
+          <p class="text-stone-600 text-sm leading-relaxed">سیستەمی پێداچوونەوەی کوێرانە (Blind Peer Review) بۆ دۆزینەوەی کەموکوڕییە زانستییەکان و بەرزکردنەوەی ئاستی دەقەکە.</p>
+        </div>
+      </div>
+    </main>
+  }
+
+  <!-- Writing View -->
+  @if (currentView() === 'writing') {
+    <main class="max-w-7xl mx-auto px-4 py-8">
+      
+      <!-- Window 1: Configuration -->
+      @if (writingWindow() === 1) {
+        <div class="bg-white rounded-3xl shadow-sm border border-stone-200 p-8">
+          <div class="flex items-center justify-between mb-8 border-b border-stone-100 pb-4">
+            <h2 class="text-2xl font-bold flex items-center gap-2 text-stone-800">
+              <mat-icon class="text-emerald-600">tune</mat-icon>
+              پەنجەرەی یەکەم: ڕێکخستنی پێکهاتە
+            </h2>
+          </div>
+
+          <form [formGroup]="advancedForm" (ngSubmit)="sendToWindow2()" class="space-y-8">
+            
+            <!-- Row 1: Title & Topic -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="title" class="block text-sm font-semibold text-stone-700 mb-2">ناونیشان</label>
+                <input id="title" type="text" formControlName="title" placeholder="ناونیشانی کتێب یان توێژینەوەکە..." class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 p-3">
+              </div>
+              <div>
+                <label for="topic" class="block text-sm font-semibold text-stone-700 mb-2">بابەت</label>
+                <select id="topic" formControlName="topic" class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-xl focus:ring-2 focus:ring-emerald-500 p-3">
+                  @for (t of topics; track t) { <option [value]="t">{{t}}</option> }
+                </select>
+              </div>
+            </div>
+
+            <!-- Row 2: Type, Level, Pages -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label for="type" class="block text-sm font-semibold text-stone-700 mb-2">جۆری نوسین</label>
+                <select id="type" formControlName="type" class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-xl focus:ring-2 focus:ring-emerald-500 p-3">
+                  @for (t of writingTypes; track t) { <option [value]="t">{{t}}</option> }
+                </select>
+              </div>
+              <div>
+                <label for="level" class="block text-sm font-semibold text-stone-700 mb-2">ئاست</label>
+                <select id="level" formControlName="level" class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-xl focus:ring-2 focus:ring-emerald-500 p-3">
+                  @for (l of levels; track l) { <option [value]="l">{{l}}</option> }
+                </select>
+              </div>
+              <div>
+                <label for="pages" class="block text-sm font-semibold text-stone-700 mb-2">قەبارە (ژمارەی لاپەڕە)</label>
+                <input id="pages" type="number" formControlName="pages" placeholder="نموونە: 300" class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-xl focus:ring-2 focus:ring-emerald-500 p-3">
+                <p class="text-xs text-stone-500 mt-1">تێبینی: یەک لاپەڕە یەکسانە بە ٣٠٠ وشە</p>
+              </div>
+            </div>
+
+            <hr class="border-stone-100">
+
+            <!-- Row 3: Advanced Toggles -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Role -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                <label for="role" class="flex items-center gap-2 text-sm font-semibold text-stone-700 mb-3">
+                  <mat-icon class="text-stone-400">person</mat-icon> ئایکۆنی ڕۆڵ
+                </label>
+                <select id="role" formControlName="role" class="w-full bg-white border border-stone-200 text-stone-900 rounded-lg p-2 text-sm">
+                  @for (r of roles; track r) { <option [value]="r">{{r}}</option> }
+                </select>
+              </div>
+
+              <!-- Dialectic -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                <label for="dialectic" class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center gap-2 text-sm font-semibold text-stone-700">
+                    <mat-icon class="text-stone-400">account_tree</mat-icon>
+                    دیالێکت (تێز، دژەتێز، سێنتێز)
+                  </div>
+                  <div class="relative">
+                    <input id="dialectic" type="checkbox" formControlName="dialectic" class="sr-only peer">
+                    <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Thesis Cover -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                <label for="thesisCover" class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center gap-2 text-sm font-semibold text-stone-700">
+                    <mat-icon class="text-stone-400">auto_stories</mat-icon>
+                    بەرگی تێز
+                  </div>
+                  <div class="relative">
+                    <input id="thesisCover" type="checkbox" formControlName="thesisCover" class="sr-only peer">
+                    <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Row 3.5: Academic Standards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <!-- Citation Style -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                <label for="citationStyle" class="flex items-center gap-2 text-sm font-semibold text-stone-700 mb-3">
+                  <mat-icon class="text-stone-400">school</mat-icon> ستایلی سەرچاوەکان
+                </label>
+                <select id="citationStyle" formControlName="citationStyle" class="w-full bg-white border border-stone-200 text-stone-900 rounded-lg p-2 text-sm">
+                  @for (c of citationStyles; track c) { <option [value]="c">{{c}}</option> }
+                </select>
+              </div>
+
+              <!-- Reference Type -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                <label for="referenceType" class="flex items-center gap-2 text-sm font-semibold text-stone-700 mb-3">
+                  <mat-icon class="text-stone-400">library_books</mat-icon> جۆری سەرچاوەکان
+                </label>
+                <select id="referenceType" formControlName="referenceType" class="w-full bg-white border border-stone-200 text-stone-900 rounded-lg p-2 text-sm">
+                  @for (rt of referenceTypes; track rt) { <option [value]="rt">{{rt}}</option> }
+                </select>
+              </div>
+
+              <!-- Include References -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                <label for="includeReferences" class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center gap-2 text-sm font-semibold text-stone-700">
+                    <mat-icon class="text-stone-400">format_quote</mat-icon>
+                    دانانی سەرچاوەکان
+                  </div>
+                  <div class="relative">
+                    <input id="includeReferences" type="checkbox" formControlName="includeReferences" class="sr-only peer">
+                    <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- DOI Linking -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                <label for="doiLinking" class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center gap-2 text-sm font-semibold text-stone-700">
+                    <mat-icon class="text-stone-400">link</mat-icon>
+                    بەستەری DOI
+                  </div>
+                  <div class="relative">
+                    <input id="doiLinking" type="checkbox" formControlName="doiLinking" class="sr-only peer">
+                    <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Row 3.75: Advanced Validation -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <!-- Data Focus -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                <label for="dataFocus" class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center gap-2 text-sm font-semibold text-stone-700">
+                    <mat-icon class="text-stone-400">analytics</mat-icon>
+                    پشتبەستن بە داتا
+                  </div>
+                  <div class="relative">
+                    <input id="dataFocus" type="checkbox" formControlName="dataFocus" class="sr-only peer">
+                    <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-stone-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Data Visualization -->
+              <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 flex flex-col justify-center">
+                <label for="enableDataViz" class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center gap-2 text-sm font-semibold text-stone-700">
+                    <mat-icon class="text-stone-400">bar_chart</mat-icon>
+                    وێناکردنی داتا
+                  </div>
+                  <div class="relative">
+                    <input id="enableDataViz" type="checkbox" formControlName="enableDataViz" class="sr-only peer">
+                    <div class="w-11 h-6 bg-stone-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content
